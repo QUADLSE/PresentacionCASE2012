@@ -15,47 +15,50 @@ Warning--I didn't find a database entry for "ej_imagenes1"
 -- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty author in parrot
+Warning--empty journal in parrot
+Warning--empty year in parrot
 
 Done.
 You've used 3 entries,
             4024 wiz_defined-function locations,
-            1203 strings with 17912 characters,
-and the built_in function-call counts, 2440 in all, are:
-= -- 203
-> -- 33
-< -- 27
-+ -- 24
-- -- 3
-* -- 124
-:= -- 385
+            1211 strings with 18247 characters,
+and the built_in function-call counts, 2867 in all, are:
+= -- 208
+> -- 70
+< -- 32
++ -- 34
+- -- 10
+* -- 163
+:= -- 403
 add.period$ -- 6
 call.type$ -- 3
 change.case$ -- 3
-chr.to.int$ -- 63
-cite$ -- 3
-duplicate$ -- 168
-empty$ -- 178
-format.name$ -- 3
-if$ -- 548
+chr.to.int$ -- 81
+cite$ -- 6
+duplicate$ -- 186
+empty$ -- 213
+format.name$ -- 12
+if$ -- 650
 int.to.chr$ -- 0
 int.to.str$ -- 3
-missing$ -- 21
-newline$ -- 32
-num.names$ -- 3
-pop$ -- 33
+missing$ -- 30
+newline$ -- 34
+num.names$ -- 2
+pop$ -- 77
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 186
+skip$ -- 204
 stack$ -- 0
-substring$ -- 150
-swap$ -- 153
-text.length$ -- 6
+substring$ -- 187
+swap$ -- 168
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 3
-warning$ -- 0
-while$ -- 12
+warning$ -- 3
+while$ -- 8
 width$ -- 4
-write$ -- 52
-(There were 3 warnings)
+write$ -- 51
+(There were 6 warnings)

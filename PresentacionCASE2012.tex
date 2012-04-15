@@ -50,8 +50,8 @@
 
 
 \author{
-\IEEEauthorblockN{Alan Kharsansky, Federico Roasio, Ezequiel Espósito, Claus Rosito, Daniel Schermuk \& Ariel Lutenberg}
-\IEEEauthorblockA{Laboratorio de Sistemas Embebidos\\Facultad de Ingeniería\\Universidad de Buenos Aires\\
+\IEEEauthorblockN{Alan Kharsansky, Federico Roasio, Ezequiel Espósito, \\Claus Rosito, Daniel Schermuk \& Ariel Lutenberg}
+\IEEEauthorblockA{Laboratorio de Sistemas Embebidos,\\ Facultad de Ingeniería\\Universidad de Buenos Aires\\
 lse@fi.uba.ar}
 }
 
@@ -83,7 +83,7 @@ De esta manera se logró una plataforma repetible, ya que al estar toda la infor
 
 Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados "cuadrotores", o "quadrotor" en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
 
-Si bien algunos cuadricópteros de hobbistas \cite{drone} tienen interfases directas para ser controlados por teléfono celular, la mayoría son vehículos a control remoto, y dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
+Si bien algunos cuadricópteros de hobbistas \cite{parrot} tienen interfases directas para ser controlados por teléfono celular, la mayoría son vehículos a radio control, y todos dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
 
 En cambio, en varios grupos de investigación se está trabajando sobre el control de a bordo del cuadricóptero, es decir que la misma computadora de abordo es responsable en cierto grado de la navegación y el guiado, comportándose como un vehículo autónomo, es decir que no depende de los comandos enviados remotamente para volar. En la univerisdad de Stanford \cite{starmac} y Pennsylvania \cite{grasp}, por ejemplo, usan sistemas de visión para la navegación, mientras que para el guiado simulan la computadora de vuelo en tierra, mandándole los comandos directamente al cuadricóptero.
 
@@ -97,6 +97,7 @@ La estructura del presente trabajo es la siguiente: primero se describe el dise�
 
 
 \section{Arquitectura de Hardware}
+
 Para el desarrollo del Quadrotor se comenzó por el diseño de la mecánica estructural del mismo. Considerando que la plataforma debe ser fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, prohibiendo el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Teniendo el objetivo de que el proceso de armado del Quadrotor fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. Teniendo en cuenta la restricción en el diseño de las piezas, se elaboró el armazón mostrado en la Figura ¿?.
 
 Para el diseño de la electrónica de abordo, se analizaron los requerimientos mínimos para que la plataforma fuera funcional. Como resultado de este análisis, se concluyó que el sistema debería constar de 4 partes: 

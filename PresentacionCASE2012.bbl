@@ -21,16 +21,20 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{drone}
-D.~REF, ``A novel ultrathin elevated channel low-temperature poly-{Si} {TFT},''
-  \emph{{IEEE} Electron Device Letters}, vol.~20, pp. 569--571, Nov. 1999.
+\bibitem{parrot}
+\BIBentryALTinterwordspacing
+``Parrot.'' [Online]. Available: \url{http://www.parrot.com/}
+\BIBentrySTDinterwordspacing
 
 \bibitem{starmac}
-S.~REF, ``A novel ultrathin elevated channel low-temperature poly-{Si} {TFT},''
-  \emph{{IEEE} Electron Device Letters}, vol.~20, pp. 569--571, Nov. 1999.
+G.~Hoffmann, D.~Rajnarayan, S.~Waslander, D.~Dostal, J.~Jang, and C.~Tomlin,
+  ``The stanford testbed of autonomous rotorcraft for multi agent control
+  (starmac),'' in \emph{Digital Avionics Systems Conference, 2004. DASC 04. The
+  23rd}, vol.~2, oct. 2004, pp. 12.E.4 -- 121--10 Vol.2.
 
 \bibitem{grasp}
-G.~REF, ``A novel ultrathin elevated channel low-temperature poly-{Si} {TFT},''
-  \emph{{IEEE} Electron Device Letters}, vol.~20, pp. 569--571, Nov. 1999.
+N.~Michael, D.~Mellinger, Q.~Lindsey, and V.~Kumar, ``The grasp multiple
+  micro-uav testbed,'' \emph{Robotics Automation Magazine, IEEE}, vol.~17,
+  no.~3, pp. 56 --65, sept. 2010.
 
 \end{thebibliography}
