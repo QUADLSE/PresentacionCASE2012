@@ -21,9 +21,16 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{IEEEexample:confwithpaper}
-M.~Wegmuller, J.~P. von~der Weid, P.~Oberson, and N.~Gisin, ``High resolution
-  fiber distributed measurements with coherent {OFDR},'' in \emph{Proc.
-  {ECOC}'00}, 2000, paper 11.3.4, p. 109.
+\bibitem{drone}
+D.~REF, ``A novel ultrathin elevated channel low-temperature poly-{Si} {TFT},''
+  \emph{{IEEE} Electron Device Letters}, vol.~20, pp. 569--571, Nov. 1999.
+
+\bibitem{starmac}
+S.~REF, ``A novel ultrathin elevated channel low-temperature poly-{Si} {TFT},''
+  \emph{{IEEE} Electron Device Letters}, vol.~20, pp. 569--571, Nov. 1999.
+
+\bibitem{grasp}
+G.~REF, ``A novel ultrathin elevated channel low-temperature poly-{Si} {TFT},''
+  \emph{{IEEE} Electron Device Letters}, vol.~20, pp. 569--571, Nov. 1999.
 
 \end{thebibliography}

@@ -9,49 +9,53 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: IEEEfull.bib
 Database file #2: PresentacionCASE2012.bib
+Warning--I didn't find a database entry for "ej_control1"
+Warning--I didn't find a database entry for "ej_control2"
+Warning--I didn't find a database entry for "ej_imagenes1"
 -- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 1 entry,
+You've used 3 entries,
             4024 wiz_defined-function locations,
-            1198 strings with 17961 characters,
-and the built_in function-call counts, 780 in all, are:
-= -- 54
-> -- 17
-< -- 1
-+ -- 8
-- -- 4
-* -- 51
-:= -- 130
-add.period$ -- 2
-call.type$ -- 1
-change.case$ -- 1
-chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 56
-empty$ -- 67
-format.name$ -- 5
-if$ -- 163
+            1203 strings with 17912 characters,
+and the built_in function-call counts, 2440 in all, are:
+= -- 203
+> -- 33
+< -- 27
++ -- 24
+- -- 3
+* -- 124
+:= -- 385
+add.period$ -- 6
+call.type$ -- 3
+change.case$ -- 3
+chr.to.int$ -- 63
+cite$ -- 3
+duplicate$ -- 168
+empty$ -- 178
+format.name$ -- 3
+if$ -- 548
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 12
-newline$ -- 26
-num.names$ -- 1
-pop$ -- 30
+int.to.str$ -- 3
+missing$ -- 21
+newline$ -- 32
+num.names$ -- 3
+pop$ -- 33
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 58
+skip$ -- 186
 stack$ -- 0
-substring$ -- 7
-swap$ -- 38
-text.length$ -- 1
+substring$ -- 150
+swap$ -- 153
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 1
+type$ -- 3
 warning$ -- 0
-while$ -- 2
-width$ -- 2
-write$ -- 32
+while$ -- 12
+width$ -- 4
+write$ -- 52
+(There were 3 warnings)
