@@ -37,4 +37,10 @@ N.~Michael, D.~Mellinger, Q.~Lindsey, and V.~Kumar, ``The grasp multiple
   micro-uav testbed,'' \emph{Robotics Automation Magazine, IEEE}, vol.~17,
   no.~3, pp. 56 --65, sept. 2010.
 
+\bibitem{razor9d0f}
+\BIBentryALTinterwordspacing
+``9 degrees of freedom - razor imu - ahrs compatible.'' [Online]. Available:
+  \url{http://www.sparkfun.com/products/9623}
+\BIBentrySTDinterwordspacing
+
 \end{thebibliography}

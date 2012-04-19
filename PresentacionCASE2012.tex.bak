@@ -71,7 +71,7 @@ De esta manera se logró una plataforma repetible, ya que al estar toda la infor
 \end{abstract}
 
 
-\IEEEkeywords{Quadrotor, Control, Telemetría, Navegación inercial }
+\IEEEkeywords{cuadricóptero, Control, Telemetría, Navegación inercial }
 
 
 \IEEEpeerreviewmaketitle
@@ -81,7 +81,7 @@ De esta manera se logró una plataforma repetible, ya que al estar toda la infor
 \section{Introducción}
 % no \IEEEPARstart
 
-Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados "cuadrotores", o "quadrotor" en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
+Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados "cuadrotores", o "cuadricóptero" en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
 
 Si bien algunos cuadricópteros de hobbistas \cite{parrot} tienen interfases directas para ser controlados por teléfono celular, la mayoría son vehículos a radio control, y todos dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
 
@@ -98,33 +98,40 @@ La estructura del presente trabajo es la siguiente: primero se describe el dise�
 
 \section{Arquitectura de Hardware}
 
-Para el desarrollo del Quadrotor se comenzó por el diseño de la mecánica estructural del mismo. Considerando que la plataforma debe ser fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, prohibiendo el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Teniendo el objetivo de que el proceso de armado del Quadrotor fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. Teniendo en cuenta la restricción en el diseño de las piezas, se elaboró el armazón mostrado en la Figura \ref{ref:quadrender}.
+Para el desarrollo del cuadricóptero se comenzó por el diseño de su mecánica estructural. Para que la plataforma debe sea fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, prohibiendo el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Teniendo el objetivo de que el proceso de armado del cuadricóptero fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. Teniendo en cuenta la restricción en el diseño de las piezas, se elaboró el armazón mostrado en la Figura \ref{ref:quadrender}.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=2.5in]{quadrotor.jpg}
-\caption{Diseño final del quadrotor}
+\caption{Diseño final del cuadricóptero}
 \label{ref:quadrender}
 \end{figure}
 
-Para el diseño de la electrónica de abordo, se analizaron los requerimientos mínimos para que la plataforma fuera funcional. Como resultado de este análisis, se concluyó que el sistema debería constar de 4 partes: 
+Para el diseño de la electrónica de abordo, se analizaron los requerimientos mínimos para que la plataforma fuera funcional. Como resultado de este análisis, se concluyó que el sistema debería constar de 4 sistemas principales: 
 \begin{itemize}
-\item Microcontrolador Principal
-\item Sensores de Navegación 
-\item Sistema de Comunicación
-\item Controlador de Velocidad para Motores Brushless
+\item Microcontrolador principal
+\item Sensores de navegación 
+\item Sistema de comunicación
+\item Controlador de velocidad para motores brushless
 \end{itemize}
 	
 El microcontrolador principal elegido fue el LPC1769 de NXP Semiconductors, el cual cuenta con un núcleo ARM Cortex M3.  Este microcontrolador es capaz de ejecutar el algoritmo de control de orientación del vehículo y dispone de un tiempo ocioso de más del 80\%, lo cual permite la implementación de funcionalidades  adicionales sin modificar la estructura de abordo.
-Para la elección de los sensores de navegación se consideró que sería interesante que el microcontrolador recibiera información procesada acerca de la orientación del Quadrotor. Esta elección resultó en la necesidad de utilizar un segundo procesador para el análisis y filtrado de los sensores. Dados estos requerimientos, se agregó la necesidad de evitar las derivas temporales, ocasionadas por los sensores inerciales relativos, tales como los acelerómetros y giróscopos, los cuales aportan información relativa al cambio de posición y no a la posición absoluta respecto de un eje de referencia dado. Considerando este último requisito y teniendo en cuenta que el Quadrotor posee un gran espectro de utilidad en recintos cerrados, se descartó el uso de GPS, optando por el uso de magnetómetros, los cuales brindan información acerca de la posición del vehículo respecto al campo magnético del planeta. Finalmente se optó por el desarrollo Razor 9DoF (Degrees of Freedom) IMU (Inertial Measurement Unit), el cual cuenta con sensores de aceleración, giróscopos y magnetómetros alineados para la medición de las magnitudes en una terna ortogonal directa. Esta placa cuenta además con un ATmega328 para el procesamiento de los sensores.
+Para la elección de los sensores de navegación se consideró que sería interesante que el microcontrolador recibiera información pre-procesada acerca de la orientación del cuadricóptero. Esta elección resultó en la necesidad de utilizar un segundo procesador para el análisis y filtrado de estos sensores. Dados estos requerimientos, se agregó la necesidad de evitar las derivas temporales, ocasionadas por los sensores inerciales relativos, tales como los acelerómetros y giróscopos, los cuales aportan información relativa al cambio de posición y no a la posición absoluta respecto de un eje de referencia dado. Considerando este último requisito y teniendo en cuenta que el cuadricóptero posee un gran espectro de utilidad en recintos cerrados, se descartó el uso de GPS, optando por el uso de magnetómetros, los cuales brindan información acerca de la posición del vehículo respecto al campo magnético del planeta. Finalmente se optó por el desarrollo Razor 9DoF (Degrees of Freedom) IMU (Inertial Measurement Unit) \cite{razor9d0f}, el cual cuenta con sensores de aceleración, giróscopos y magnetómetros alineados para la medición de las magnitudes en una terna ortogonal directa. Esta placa cuenta además con un ATmega328 para el procesamiento de los sensores.
 
 En cuanto a los requerimientos del sistema de comunicación física, se estableció la necesidad de un control de colisiones por parte del hardware, simplificando la programación del microcontrolador principal y liberando tiempo de cálculo para los algoritmos de control y de funcionalidades adicionales. Dado este requisito y estableciendo un rango de utilización de unos pocos cientos de metros, se optó por utilizar los módulos XBee Pro de Digi International, los cuales poseen un control de colisión de paquetes tienen una comunicación sencilla con el microcontrolador, por puerto serie. Esta elección se vio respaldada por la disponibilidad local de los módulos, favoreciendo a la posibilidad de repetición de la plataforma.
-Para la elección de los controladores de velocidad de los motores, se optó por la utilización de ESC (Electronic Speed Control) para modelismo. Los mismos son capaces de proporcionar la corriente necesaria para el manejo de los motores y poseen un control del tipo PWM, lo cual aporta a la simplicidad de uso. 
+Para la elección de los controladores de velocidad de los motores, se optó por la utilización de ESC (Electronic Speed Control) para modelismo. Los mismos son capaces de proporcionar la corriente necesaria para el manejo de los motores y poseen un control del tipo PWM, lo cual aporta a la simplicidad de uso.
 
-	Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware.
+	Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En la Figura \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
+	
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{conexiones}
+\caption{Esquema de interconexión}
+\label{ref:conexiones}
+\end{figure}
 
 \section{Arquitectura de Software}
-Recordando que uno de los principales objetivos del proyecto es la capacidad de reproducción y la escalabilidad del mismo, resulta de vital importancia la independización entre el software y el hardware. Esto permitirá futuras actualizaciones de hardware, con pequeños retoques en el software. Con el fin de lograr este objetivo, se diagramó una estructura de software embebido guiado por la siguiente estructura:
+Dado que uno de los principales objetivos del proyecto es que éste sea de fácil reproducción y escalabilidad, resulta de vital importancia lograr independencia entre el software y el hardware. Esto permitirá futuras actualizaciones de hardware, con pequeños retoques en el software. Con el fin de lograr este objetivo, se diagramó una estructura de software embebido compuesto por las siguientes partes:
 \begin{itemize}
 \item HAL (Hardware Abstraction Layer)
 \item API  (Hardware Abstraction Layer)
@@ -137,9 +144,11 @@ La API es la capa que provee al usuario los métodos de programación. Esta capa
 
 La capa de aplicación es la cual programa el usuario. Esta capa hace uso solamente de la API, no pudiendo acceder directamente al HAL o al hardware. La aplicación será el algoritmo de control, navegación o cualquier otra funcionalidad que el usuario quiera agregar.
 
-Esta división por capas evidencia una mayor complejidad en la programación de las mismas, pero aporta a la portabilidad del código escrito, independizándolo del hardware utilizado. Esta independencia nos permite la migración entre plataformas diferentes, sin la necesidad de reescribir completamente el programa. Esta estructura favorece, además, a la simplicidad de la escritura del código por parte del usuario, utilizando funciones que elevan el nivel de abstracción de la programación.
+Esta división por capas implica una mayor complejidad en la programación de las mismas, pero facilita la portabilidad del código escrito, independizándolo del hardware utilizado, como se mencionó anteriormente. Esta independencia nos permite la migración entre plataformas diferentes, sin la necesidad de reescribir completamente el programa. Esta estructura favorece, además, la escritura del código por parte de terceros, utilizando funciones que elevan el nivel de abstracción de la programación.
 
-Como herramienta adicional para aumentar la fiabilidad de las comunicaciones, se desarrolló un protocolo capaz de detectar errores en las comunicaciones y de transportar paquetes de información entre nodos. Este sistema se subdividió en 4 capas: Aplicación, Transporte, Enlace, Física.
+\section{Arquitectura de Comunicaciones}
+
+Para aumentar la confiabilidad y versatilidad del sistema se desarrolló una arquitectura completa para las comunicaciones. Para esto se diseñó un protocolo capaz de detectar errores en las comunicaciones y de transportar paquetes de información entre nodos. Este sistema se subdividió en 4 capas: Aplicación, Transporte, Enlace, Física.
 
 La capa física es íntegramente controlada por los módulos XBee, dejando los modos de direccionamiento a las capas de nivel superior.
 
@@ -156,13 +165,17 @@ En la Figura \ref{ref:trama} se muestra el formato de la trama establecida por e
  
 La capa de transporte es además encargada de verificar la trama mediante las direcciones de fuente y destino, numero de secuencia y checksum. Dado que el protocolo permite interconexión entre diferentes nodos, en ambos sentidos, se requiere un tipo de dato que especifique el carácter de la transmisión (control, telemetría, uplink, downlink).
 
-La capa de aplicación implementa la utilidad del protocolo de comunicaciones. Es posible implementar has 256 tipos diferentes de datos, diferenciándolos en su propósito. Los tipos de datos implementados hasta la fecha son:
-•	System: transmite comandos de sistema, alternando entre modos de funcionamiento del vehículo.
-•	Control: transmite información acerca del control de vuelo, tales como cambio en la posición, navegación, acciones, etc.
-•	Debug: transmite mensajes de baja prioridad, a interpretarse desde la consola terrestre como caracteres ASCII.
-•	Telemetry: transmite paquetes de datos relacionados con la telemetría.
+La capa de aplicación implementa la utilidad del protocolo de comunicaciones. Es posible implementar hasta 256 tipos diferentes de datos, diferenciándolos en su propósito. Los tipos de datos implementados hasta la fecha son:
+\begin{itemize}
+\item System: transmite comandos de sistema, alternando entre modos de funcionamiento del vehículo.
+\item Control: transmite información acerca del control de vuelo, tales como cambio en la posición, navegación, acciones, etc.
+\item Debug: transmite mensajes de baja prioridad, a interpretarse desde la consola terrestre como caracteres ASCII.
+\item Telemetry: transmite paquetes de datos relacionados con la telemetría.
+\end{itemize}
 
-Como es apreciable de la descripción del protocolo de comunicaciones, el canal estará inundado por diferentes tipos de paquetes, transportando información que será útil a distintos puestos de trabajo. Dado que estos puestos pueden estar ubicados en diferentes locaciones, se implementó un servidor de mensajes, denominado RadioServer. Este servidor se encarga de canalizar las comunicaciones entre los dispositivos de tierra y el Quadrotor. Ante el arribo de un mensaje, se direccionará el mismo al usuario en cuestión, utilizando puertos TCP. Esta estructura de comunicaciones brinda una gran flexibilidad en cuanto al espectro de utilización del dispositivo, pudiendo desplegar simultáneamente funciones en campo y en laboratorio.
+\section{Implementación del servidor de mensajes}
+
+Como se aprecia en la descripción del protocolo de comunicaciones, el canal estará inundado por diferentes tipos de paquetes, transportando información que será útil a distintos puestos de trabajo. Dado que estos puestos pueden estar ubicados en diferentes locaciones, se implementó un servidor de mensajes, denominado RadioServer. Este servidor se encarga de canalizar las comunicaciones entre los dispositivos de tierra y el cuadricóptero. Ante el arribo de un mensaje, se direccionará el mismo al usuario en cuestión, utilizando puertos TCP. Esta estructura de comunicaciones brinda una gran flexibilidad en cuanto al espectro de utilización del dispositivo, pudiendo desplegar simultáneamente funciones en campo y en laboratorio.
 En la Figura \ref{ref:server} se ilustra el funcionamiento del servidor.
 
 \begin{figure}[!t]

@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2011)
+This is BibTeX, Version 0.99d (TeX Live 2010)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: PresentacionCASE2012.aux
 The style file: IEEEtran.bst
@@ -18,47 +18,50 @@ Warning--I didn't find a database entry for "ej_imagenes1"
 Warning--empty author in parrot
 Warning--empty journal in parrot
 Warning--empty year in parrot
+Warning--empty author in razor9d0f
+Warning--empty journal in razor9d0f
+Warning--empty year in razor9d0f
 
 Done.
-You've used 3 entries,
+You've used 4 entries,
             4024 wiz_defined-function locations,
-            1211 strings with 18247 characters,
-and the built_in function-call counts, 2867 in all, are:
-= -- 208
-> -- 70
+            1214 strings with 18343 characters,
+and the built_in function-call counts, 3136 in all, are:
+= -- 225
+> -- 71
 < -- 32
-+ -- 34
++ -- 35
 - -- 10
-* -- 163
-:= -- 403
-add.period$ -- 6
-call.type$ -- 3
-change.case$ -- 3
+* -- 181
+:= -- 451
+add.period$ -- 8
+call.type$ -- 4
+change.case$ -- 4
 chr.to.int$ -- 81
-cite$ -- 6
-duplicate$ -- 186
-empty$ -- 213
+cite$ -- 10
+duplicate$ -- 213
+empty$ -- 241
 format.name$ -- 12
-if$ -- 650
+if$ -- 703
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 30
-newline$ -- 34
+int.to.str$ -- 4
+missing$ -- 34
+newline$ -- 39
 num.names$ -- 2
-pop$ -- 77
+pop$ -- 93
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 204
+skip$ -- 223
 stack$ -- 0
-substring$ -- 187
-swap$ -- 168
+substring$ -- 188
+swap$ -- 177
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 3
-warning$ -- 3
+type$ -- 4
+warning$ -- 6
 while$ -- 8
-width$ -- 4
-write$ -- 51
-(There were 6 warnings)
+width$ -- 5
+write$ -- 59
+(There were 9 warnings)
