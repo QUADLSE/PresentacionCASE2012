@@ -81,17 +81,17 @@ De esta manera se logró una plataforma repetible, ya que al estar toda la infor
 \section{Introducción}
 % no \IEEEPARstart
 
-Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados "cuadrotores", o "cuadricóptero" en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
+Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados "cuadricópteros", o "cuadricóptero" en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
 
-Si bien algunos cuadricópteros de hobbistas \cite{parrot} tienen interfases directas para ser controlados por teléfono celular, la mayoría son vehículos a radio control, y todos dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
+Si bien algunos cuadricópteros de hobbystas \cite{parrot} tienen interfaces directas para ser controlados por teléfono celular, la mayoría son vehículos a radio control, y todos dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
 
-En cambio, en varios grupos de investigación se está trabajando sobre el control de a bordo del cuadricóptero, es decir que la misma computadora de abordo es responsable en cierto grado de la navegación y el guiado, comportándose como un vehículo autónomo, es decir que no depende de los comandos enviados remotamente para volar. En la univerisdad de Stanford \cite{starmac} y Pennsylvania \cite{grasp}, por ejemplo, usan sistemas de visión para la navegación, mientras que para el guiado simulan la computadora de vuelo en tierra, mandándole los comandos directamente al cuadricóptero.
+En cambio, en varios grupos de investigación se está trabajando sobre el control de a bordo del cuadricóptero, es decir que la misma computadora de abordo es responsable en cierto grado de la navegación y el guiado, comportándose como un vehículo autónomo, es decir que no depende de los comandos enviados remotamente para volar. En la universidad de Stanford \cite{starmac} y Pennsylvania \cite{grasp}, por ejemplo, usan sistemas de visión para la navegación, mientras que para el guiado simulan la computadora de vuelo en tierra, mandándole los comandos directamente al cuadricóptero.
 
-En general, la mayor parte de los trabajos publicados con respecto a los cuadricópteros hacen uso de unidades comerciales, centrándose en los aspectos de los algoritmos de control y áreas relacionadas \cite{ej_control1} \cite{ej_control2}, o bien en aplicaciones como por ejemplo adquisición de imágenes y su respectivo procesamiento \cite{ej_imagenes1}, relegando los aspectos de la ingeniería del cuadricóptero a segundo plano. 
+En general, la mayor parte de los trabajos publicados con respecto a los cuadricópteros hacen uso de unidades comerciales, centrándose en los aspectos de los algoritmos de control y áreas relacionadas \cite{starmac} \cite{grasp}, o bien en aplicaciones como por ejemplo adquisición de imágenes y su respectivo procesamiento \cite{grasp}, relegando los aspectos de la ingeniería del cuadricóptero a segundo plano. 
 
-Desde el Laboratorio de Sistemas Embebidos de la Facultad de Ingeniería de la Universidad de Buenos Aires abordamos el problema de diseñar e implementar un cuadricóptero de vuelo autónomo partiendo desde cero, con la visión de que esto nos permitiría ganar concocimiento y control sobre cada una de las partes que componen el sistema. A su vez, vimos que es un plataforma muy rica para generar desarrollos en cada uno de sus subsistemas, mejorando la performance del conjunto y abriendo nuevas áreas de trabajo.
+Desde el Laboratorio de Sistemas Embebidos de la Facultad de Ingeniería de la Universidad de Buenos Aires abordamos el problema de diseñar e implementar un cuadricóptero de vuelo autónomo partiendo desde cero, con la visión de que esto nos permitiría ganar conocimiento y control sobre cada una de las partes que componen el sistema. A su vez, vimos que es un plataforma muy rica para generar desarrollos en cada uno de sus subsistemas, mejorando la performance del conjunto y abriendo nuevas áreas de trabajo.
 
-En particular, se trabajo con el objetivo de crear una plataforma abierta y escalable, que le permita a cualquier individuo o grupo empezar a trabajar en el área nutríendose de los desarrollos presentados y generando un marco para el trabajo en conjunto sobre mejoras y avances. En cuanto al aspecto abierto, se logró utilizando un sistema de documentación tipo wiki, de acceso público, de manera que la información esté disponible universalmente para los individuos o grupos que quieran ponerse a trabajar en la plataforma. Y el aspecto escalable se logró separando el sistema en subsistemas modulares, de forma que cada subsistema puede ser cambiado y mejorado individualmente sin perjudicar el funcionamiento del conjunto. Se tuvo especial cuidado en la interconección de la computadora de abordo con los sensores y en el desarrollo de una arquitectura de capas de abstracción para la computadora de a bordo, que logra la independencia progresiva del software con respecto al hardware. 
+En particular, se trabajo con el objetivo de crear una plataforma abierta y escalable, que le permita a cualquier individuo o grupo empezar a trabajar en el área nutriéndose de los desarrollos presentados y generando un marco para el trabajo en conjunto sobre mejoras y avances. En cuanto al aspecto abierto, se logró utilizando un sistema de documentación tipo wiki, de acceso público, de manera que la información esté disponible universalmente para los individuos o grupos que quieran ponerse a trabajar en la plataforma. Y el aspecto escalable se logró separando el sistema en subsistemas modulares, de forma que cada subsistema puede ser cambiado y mejorado individualmente sin perjudicar el funcionamiento del conjunto. Se tuvo especial cuidado en la interconexión de la computadora de abordo con los sensores y en el desarrollo de una arquitectura de capas de abstracción para la computadora de a bordo, que logra la independencia progresiva del software con respecto al hardware. 
 
 La estructura del presente trabajo es la siguiente: primero se describe el diseño y la implementación mecánica y de hardware, luego la arquitectura del software tanto de tierra como de abordo, luego se resume el estado actual del desarrollo y por último se presenta una breve descripción de las líneas de trabajo que se desprenden del presente trabajo.
 
@@ -121,7 +121,7 @@ Para la elección de los sensores de navegación se consideró que sería intere
 En cuanto a los requerimientos del sistema de comunicación física, se estableció la necesidad de un control de colisiones por parte del hardware, simplificando la programación del microcontrolador principal y liberando tiempo de cálculo para los algoritmos de control y de funcionalidades adicionales. Dado este requisito y estableciendo un rango de utilización de unos pocos cientos de metros, se optó por utilizar los módulos XBee Pro de Digi International, los cuales poseen un control de colisión de paquetes tienen una comunicación sencilla con el microcontrolador, por puerto serie. Esta elección se vio respaldada por la disponibilidad local de los módulos, favoreciendo a la posibilidad de repetición de la plataforma.
 Para la elección de los controladores de velocidad de los motores, se optó por la utilización de ESC (Electronic Speed Control) para modelismo. Los mismos son capaces de proporcionar la corriente necesaria para el manejo de los motores y poseen un control del tipo PWM, lo cual aporta a la simplicidad de uso.
 
-	Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En la Figura \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
+Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En la Figura \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
 	
 \begin{figure}[!t]
 \centering
@@ -129,6 +129,8 @@ Para la elección de los controladores de velocidad de los motores, se optó por
 \caption{Esquema de interconexión}
 \label{ref:conexiones}
 \end{figure}
+
+Juntando los costos de mecánica y de electrónica se estimó un costo de fabricación estimado de 400 dólares.
 
 \section{Arquitectura de Software}
 Dado que uno de los principales objetivos del proyecto es que éste sea de fácil reproducción y escalabilidad, resulta de vital importancia lograr independencia entre el software y el hardware. Esto permitirá futuras actualizaciones de hardware, con pequeños retoques en el software. Con el fin de lograr este objetivo, se diagramó una estructura de software embebido compuesto por las siguientes partes:
@@ -145,6 +147,15 @@ La API es la capa que provee al usuario los métodos de programación. Esta capa
 La capa de aplicación es la cual programa el usuario. Esta capa hace uso solamente de la API, no pudiendo acceder directamente al HAL o al hardware. La aplicación será el algoritmo de control, navegación o cualquier otra funcionalidad que el usuario quiera agregar.
 
 Esta división por capas implica una mayor complejidad en la programación de las mismas, pero facilita la portabilidad del código escrito, independizándolo del hardware utilizado, como se mencionó anteriormente. Esta independencia nos permite la migración entre plataformas diferentes, sin la necesidad de reescribir completamente el programa. Esta estructura favorece, además, la escritura del código por parte de terceros, utilizando funciones que elevan el nivel de abstracción de la programación.
+
+En la Figura \ref{ref:soft} se muestra un diagrama de la implementación en las capas previamente descritas.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{soft}
+\caption{Estructura de software}
+\label{ref:soft}
+\end{figure}
 
 \section{Arquitectura de Comunicaciones}
 
@@ -185,6 +196,8 @@ En la Figura \ref{ref:server} se ilustra el funcionamiento del servidor.
 \label{ref:server}
 \end{figure}
  
+ 
+\section{Comparación con otros cuadricópteros}
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -270,8 +283,8 @@ En la Figura \ref{ref:server} se ilustra el funcionamiento del servidor.
 
 
 
-\section{Conclusion}
-The conclusion goes here.
+\section*{Conclusión}
+The conclusión goes here.
 
 
 
@@ -280,7 +293,7 @@ The conclusion goes here.
 
 % use section* for acknowledgement
 
-\section*{Acknowledgment}
+\section*{Agradecimientos}
 
 
 The authors would like to thank...

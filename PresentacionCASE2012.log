@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.7.7)  19 APR 2012 14:35
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.7.7)  19 APR 2012 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -600,15 +600,6 @@ Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 84.
 
-
-LaTeX Warning: Citation `ej_control1' on page 1 undefined on input line 90.
-
-
-LaTeX Warning: Citation `ej_control2' on page 1 undefined on input line 90.
-
-
-LaTeX Warning: Citation `ej_imagenes1' on page 1 undefined on input line 90.
-
 [1{/usr/local/texlive/2010/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
@@ -625,11 +616,14 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 <conexiones.png, id=10, 252.945pt x 171.64125pt>
 File: conexiones.png Graphic file (type png)
- <use conexiones.png> [2 <./quadrotor.jpg> <./conexiones.png>] <trama.png, id=1
-6, 252.945pt x 19.07124pt>
+ <use conexiones.png>
+<soft.png, id=12, 674.52pt x 184.69pt>
+File: soft.png Graphic file (type png)
+ <use soft.png> [2 <./quadrotor.jpg> <./conexiones.png>] <trama.png, id=17, 252
+.945pt x 19.07124pt>
 File: trama.png Graphic file (type png)
-
-<use trama.png> <server.png, id=17, 252.945pt x 182.6825pt>
+ <use trama.png>
+<server.png, id=18, 252.945pt x 182.6825pt>
 File: server.png Graphic file (type png)
  <use server.png>
 (./PresentacionCASE2012.bbl
@@ -647,27 +641,24 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3 <./trama.png> <./server.png>] (./PresentacionCASE2012.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[3 <./soft.png> <./trama.png> <./server.png>] (./PresentacionCASE2012.aux) ) 
 Here is how much of TeX's memory you used:
- 4821 strings out of 493747
- 69807 string characters out of 3143547
- 150585 words of memory out of 3000000
- 8017 multiletter control sequences out of 15000+200000
+ 4824 strings out of 493747
+ 69836 string characters out of 3143547
+ 150593 words of memory out of 3000000
+ 8019 multiletter control sequences out of 15000+200000
  38435 words of font info for 74 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
  38i,8n,38p,1334b,342s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2010/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2010/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/201
-0/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2010/texmf-d
-ist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on PresentacionCASE2012.pdf (3 pages, 150797 bytes).
+{/u
+sr/local/texlive/2010/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texliv
+e/2010/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2010/tex
+mf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2010/texmf-dist/f
+onts/type1/urw/times/utmr8a.pfb>
+Output written on PresentacionCASE2012.pdf (3 pages, 182813 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
+ 37 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
