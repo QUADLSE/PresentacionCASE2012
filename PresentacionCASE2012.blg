@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2010)
+This is BibTeX, Version 0.99d (TeX Live 2011)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: PresentacionCASE2012.aux
 The style file: IEEEtran.bst
@@ -9,9 +9,6 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: IEEEfull.bib
 Database file #2: PresentacionCASE2012.bib
-Warning--I didn't find a database entry for "ej_control1"
-Warning--I didn't find a database entry for "ej_control2"
-Warning--I didn't find a database entry for "ej_imagenes1"
 -- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -25,7 +22,7 @@ Warning--empty year in razor9d0f
 Done.
 You've used 4 entries,
             4024 wiz_defined-function locations,
-            1214 strings with 18343 characters,
+            1211 strings with 18309 characters,
 and the built_in function-call counts, 3136 in all, are:
 = -- 225
 > -- 71
@@ -64,4 +61,4 @@ warning$ -- 6
 while$ -- 8
 width$ -- 5
 write$ -- 59
-(There were 9 warnings)
+(There were 6 warnings)

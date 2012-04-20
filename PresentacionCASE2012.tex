@@ -6,7 +6,7 @@
 
 \ifCLASSINFOpdf
    \usepackage[pdftex]{graphicx}
-   \graphicspath{{../pdf/}{../jpeg/}}
+   \graphicspath{{pdf/}{jpeg/}}
    \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 \else
    \usepackage[dvips]{graphicx}
@@ -63,15 +63,18 @@ lse@fi.uba.ar}
 
 \begin{abstract}
 %\boldmath
-Se presenta el diseño y la implementación de un cuadricóptero como plataforma voladora de investigación y desarrollo en temas de electrónica, sistemas embebidos y control. Si bien en los últimos años ha habido muchos trabajos referidos a cuadricópteros, en general se centraban en aplicaciones sobre cuadricópteros comerciales. En cambio, el foco del presente trabajo está puesto en obtener un sistema abierto y escalable que sirva como base para futuros desarrollos.
+Se presenta el diseño y la implementación de un cuadricóptero como plataforma voladora de investigación y desarrollo en temas de electrónica, sistemas embebidos y control. El foco del presente trabajo está puesto en obtener un sistema abierto y escalable que sirva como base para futuros desarrollos.
 
 Para eso se siguieron tres líneas de trabajo paralelas: el diseño mecánico está realizado de forma modular, la implementación en hardware se hizo utilizando productos comerciales off the shelf con su debida especificación, y el software de control se separó en diferentes capas de abstracción.
 
 De esta manera se logró una plataforma repetible, ya que al estar toda la información disponible cualquier laboratorio, grupo o individuo puede armar uno o más cuadricópteros de características similares. Y por otro lado, también se apunta a que sea una plataforma común de desarrollo, donde varios grupos trabajando de manera concurrente sobre diferentes aspectos de la mecánica, el hardware y el software del cuadricóptero se complementen y amplíen las posibilidades y el alcance de la plataforma.
+%% 168 palabras de un máximo de 250 permitidas. estamos bien!
 \end{abstract}
 
 
-\IEEEkeywords{cuadricóptero, Control, Telemetría, Navegación inercial }
+\begin{IEEEkeywords}
+``Cuadricóptero'', Control, Telemetría, Navegación inercial
+\end{IEEEkeywords}
 
 
 \IEEEpeerreviewmaketitle
@@ -81,31 +84,33 @@ De esta manera se logró una plataforma repetible, ya que al estar toda la infor
 \section{Introducción}
 % no \IEEEPARstart
 
-Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados "cuadricópteros", o "cuadricóptero" en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
+Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados ``cuadrotores'', o ``quadrotor'' en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
 
-Si bien algunos cuadricópteros de hobbystas \cite{parrot} tienen interfaces directas para ser controlados por teléfono celular, la mayoría son vehículos a radio control, y todos dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
+Si bien algunos cuadricópteros de hobbyistas \cite{parrot} tienen interfaces directas para ser controlados por teléfono celular, la mayoría son vehículos a radio control, y todos dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
 
-En cambio, en varios grupos de investigación se está trabajando sobre el control de a bordo del cuadricóptero, es decir que la misma computadora de abordo es responsable en cierto grado de la navegación y el guiado, comportándose como un vehículo autónomo, es decir que no depende de los comandos enviados remotamente para volar. En la universidad de Stanford \cite{starmac} y Pennsylvania \cite{grasp}, por ejemplo, usan sistemas de visión para la navegación, mientras que para el guiado simulan la computadora de vuelo en tierra, mandándole los comandos directamente al cuadricóptero.
+En cambio, en varios grupos de investigación se está trabajando sobre el control de a bordo del cuadricóptero de modo que la misma computadora de abordo es responsable en cierto grado de la navegación y el guiado, comportándose como un vehículo autónomo, es decir que no depende de los comandos enviados remotamente para volar. En la universidad de Stanford \cite{starmac} y Pennsylvania \cite{grasp}, por ejemplo, usan sistemas de visión para la navegación, mientras que para el guiado simulan la computadora de vuelo en tierra, mandándole los comandos directamente al cuadricóptero.
 
 En general, la mayor parte de los trabajos publicados con respecto a los cuadricópteros hacen uso de unidades comerciales, centrándose en los aspectos de los algoritmos de control y áreas relacionadas \cite{starmac} \cite{grasp}, o bien en aplicaciones como por ejemplo adquisición de imágenes y su respectivo procesamiento \cite{grasp}, relegando los aspectos de la ingeniería del cuadricóptero a segundo plano. 
 
-Desde el Laboratorio de Sistemas Embebidos de la Facultad de Ingeniería de la Universidad de Buenos Aires abordamos el problema de diseñar e implementar un cuadricóptero de vuelo autónomo partiendo desde cero, con la visión de que esto nos permitiría ganar conocimiento y control sobre cada una de las partes que componen el sistema. A su vez, vimos que es un plataforma muy rica para generar desarrollos en cada uno de sus subsistemas, mejorando la performance del conjunto y abriendo nuevas áreas de trabajo.
+Desde el Laboratorio de Sistemas Embebidos de la Facultad de Ingeniería de la Universidad de Buenos Aires abordamos el problema de diseñar e implementar un cuadricóptero de vuelo autónomo partiendo desde cero, con la visión de que esto nos permitiría ganar conocimiento y control sobre cada una de las partes que componen el sistema. A su vez, vimos que es un plataforma muy rica para generar desarrollos en cada uno de sus subsistemas, mejorando la performance del conjunto y abriendo nuevas áreas de trabajo. Una foto del prototipo se puede ver en la Fig. \ref{ref:quadfoto}.
 
-En particular, se trabajo con el objetivo de crear una plataforma abierta y escalable, que le permita a cualquier individuo o grupo empezar a trabajar en el área nutriéndose de los desarrollos presentados y generando un marco para el trabajo en conjunto sobre mejoras y avances. En cuanto al aspecto abierto, se logró utilizando un sistema de documentación tipo wiki, de acceso público, de manera que la información esté disponible universalmente para los individuos o grupos que quieran ponerse a trabajar en la plataforma. Y el aspecto escalable se logró separando el sistema en subsistemas modulares, de forma que cada subsistema puede ser cambiado y mejorado individualmente sin perjudicar el funcionamiento del conjunto. Se tuvo especial cuidado en la interconexión de la computadora de abordo con los sensores y en el desarrollo de una arquitectura de capas de abstracción para la computadora de a bordo, que logra la independencia progresiva del software con respecto al hardware. 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.25in]{foto_quad.png}
+\caption{Prototipo del cuadricóptero}
+\label{ref:quadfoto}
+\end{figure}
+
+En particular, se trabajó con el objetivo de crear una plataforma abierta y escalable, que le permita a cualquier individuo o grupo empezar a trabajar en el área nutriéndose de los desarrollos presentados y generando un marco para el trabajo en conjunto sobre mejoras y avances. En cuanto al aspecto abierto, se logró utilizando un sistema de documentación tipo wiki, de acceso público, de manera que la información esté disponible universalmente para los individuos o grupos que quieran ponerse a trabajar en la plataforma. Y el aspecto escalable se logró separando el sistema en subsistemas modulares, de forma que cada subsistema puede ser cambiado y mejorado individualmente sin perjudicar el funcionamiento del conjunto. Se tuvo especial cuidado en la interconexión de la computadora de abordo con los sensores y en el desarrollo de una arquitectura de capas de abstracción para la computadora de a bordo, que logra la independencia progresiva del software con respecto al hardware. 
 
 La estructura del presente trabajo es la siguiente: primero se describe el diseño y la implementación mecánica y de hardware, luego la arquitectura del software tanto de tierra como de abordo, luego se resume el estado actual del desarrollo y por último se presenta una breve descripción de las líneas de trabajo que se desprenden del presente trabajo.
 
 
+\section{Diseño Mecánico}
+
+Para el desarrollo del cuadricóptero se comenzó por el diseño de su mecánica estructural. Para que la plataforma debe sea fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, prohibiendo el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Teniendo el objetivo de que el proceso de armado del cuadricóptero fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. 
+
 \section{Arquitectura de Hardware}
-
-Para el desarrollo del cuadricóptero se comenzó por el diseño de su mecánica estructural. Para que la plataforma debe sea fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, prohibiendo el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Teniendo el objetivo de que el proceso de armado del cuadricóptero fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. Teniendo en cuenta la restricción en el diseño de las piezas, se elaboró el armazón mostrado en la Figura \ref{ref:quadrender}.
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=2.5in]{quadrotor.jpg}
-\caption{Diseño final del cuadricóptero}
-\label{ref:quadrender}
-\end{figure}
 
 Para el diseño de la electrónica de abordo, se analizaron los requerimientos mínimos para que la plataforma fuera funcional. Como resultado de este análisis, se concluyó que el sistema debería constar de 4 sistemas principales: 
 \begin{itemize}
@@ -115,17 +120,18 @@ Para el diseño de la electrónica de abordo, se analizaron los requerimientos m
 \item Controlador de velocidad para motores brushless
 \end{itemize}
 	
-El microcontrolador principal elegido fue el LPC1769 de NXP Semiconductors, el cual cuenta con un núcleo ARM Cortex M3.  Este microcontrolador es capaz de ejecutar el algoritmo de control de orientación del vehículo y dispone de un tiempo ocioso de más del 80\%, lo cual permite la implementación de funcionalidades  adicionales sin modificar la estructura de abordo.
-Para la elección de los sensores de navegación se consideró que sería interesante que el microcontrolador recibiera información pre-procesada acerca de la orientación del cuadricóptero. Esta elección resultó en la necesidad de utilizar un segundo procesador para el análisis y filtrado de estos sensores. Dados estos requerimientos, se agregó la necesidad de evitar las derivas temporales, ocasionadas por los sensores inerciales relativos, tales como los acelerómetros y giróscopos, los cuales aportan información relativa al cambio de posición y no a la posición absoluta respecto de un eje de referencia dado. Considerando este último requisito y teniendo en cuenta que el cuadricóptero posee un gran espectro de utilidad en recintos cerrados, se descartó el uso de GPS, optando por el uso de magnetómetros, los cuales brindan información acerca de la posición del vehículo respecto al campo magnético del planeta. Finalmente se optó por el desarrollo Razor 9DoF (Degrees of Freedom) IMU (Inertial Measurement Unit) \cite{razor9d0f}, el cual cuenta con sensores de aceleración, giróscopos y magnetómetros alineados para la medición de las magnitudes en una terna ortogonal directa. Esta placa cuenta además con un ATmega328 para el procesamiento de los sensores.
+El microcontrolador principal elegido fue el LPC1769 de NXP Semiconductors, el cual cuenta con un núcleo ARM Cortex M3.  Este microcontrolador es capaz de ejecutar el algoritmo de control de actitud del vehículo y dispone de un tiempo ocioso de más del 80\%, lo cual permite la implementación de funcionalidades adicionales sin modificar la estructura de abordo.
+
+Para la elección de los sensores de navegación se consideró que sería interesante que el microcontrolador recibiera información pre-procesada acerca de la actitud del cuadricóptero. Esta elección resultó en la necesidad de utilizar un segundo procesador para el análisis y filtrado de estos sensores. Dados estos requerimientos, se agregó la necesidad de evitar las derivas temporales, ocasionadas por los sensores inerciales relativos, tales como los acelerómetros y giróscopos, los cuales aportan información relativa al cambio de posición y no a la posición absoluta respecto de un eje de referencia dado. Considerando este último requisito y teniendo en cuenta que el cuadricóptero posee un gran espectro de utilidad en recintos cerrados, se descartó el uso de GPS, optando por el uso de magnetómetros, los cuales brindan información acerca de la posición del vehículo respecto al campo magnético del planeta. Finalmente se optó por el desarrollo Razor 9DoF (Degrees of Freedom) IMU (Inertial Measurement Unit) \cite{razor9d0f}, el cual cuenta con sensores de aceleración, giróscopos y magnetómetros alineados para la medición de las magnitudes en una terna ortogonal directa. Esta placa cuenta además con un ATmega328 para el procesamiento de los sensores.
 
 En cuanto a los requerimientos del sistema de comunicación física, se estableció la necesidad de un control de colisiones por parte del hardware, simplificando la programación del microcontrolador principal y liberando tiempo de cálculo para los algoritmos de control y de funcionalidades adicionales. Dado este requisito y estableciendo un rango de utilización de unos pocos cientos de metros, se optó por utilizar los módulos XBee Pro de Digi International, los cuales poseen un control de colisión de paquetes tienen una comunicación sencilla con el microcontrolador, por puerto serie. Esta elección se vio respaldada por la disponibilidad local de los módulos, favoreciendo a la posibilidad de repetición de la plataforma.
 Para la elección de los controladores de velocidad de los motores, se optó por la utilización de ESC (Electronic Speed Control) para modelismo. Los mismos son capaces de proporcionar la corriente necesaria para el manejo de los motores y poseen un control del tipo PWM, lo cual aporta a la simplicidad de uso.
 
 Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En la Figura \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
 	
-\begin{figure}[!t]
+\begin{figure}[btp]
 \centering
-\includegraphics[width=2.5in]{conexiones}
+\includegraphics[width=3.25in]{interconexion.png}
 \caption{Esquema de interconexión}
 \label{ref:conexiones}
 \end{figure}
@@ -152,7 +158,7 @@ En la Figura \ref{ref:soft} se muestra un diagrama de la implementación en las 
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=2.5in]{soft}
+\includegraphics[width=3.45in]{soft}
 \caption{Estructura de software}
 \label{ref:soft}
 \end{figure}
@@ -169,14 +175,14 @@ En la Figura \ref{ref:trama} se muestra el formato de la trama establecida por e
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=2.5in]{trama}
+\includegraphics[width=3.45in]{trama}
 \caption{Ejemplo de trama del protocolo de comunicaciones}
 \label{ref:trama}
 \end{figure}
  
 La capa de transporte es además encargada de verificar la trama mediante las direcciones de fuente y destino, numero de secuencia y checksum. Dado que el protocolo permite interconexión entre diferentes nodos, en ambos sentidos, se requiere un tipo de dato que especifique el carácter de la transmisión (control, telemetría, uplink, downlink).
 
-La capa de aplicación implementa la utilidad del protocolo de comunicaciones. Es posible implementar hasta 256 tipos diferentes de datos, diferenciándolos en su propósito. Los tipos de datos implementados hasta la fecha son:
+La capa de aplicación implementa la utilidad del protocolo de comunicaciones. Es posible implementar hasta 256 tipos diferentes de datos, diferenciándolos en su propósito. Los tipos de datos implementados actualmente son:
 \begin{itemize}
 \item System: transmite comandos de sistema, alternando entre modos de funcionamiento del vehículo.
 \item Control: transmite información acerca del control de vuelo, tales como cambio en la posición, navegación, acciones, etc.
