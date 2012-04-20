@@ -174,14 +174,20 @@ En la Figura \ref{ref:soft} se muestra un diagrama de la implementación en las 
 
 Para aumentar la confiabilidad y versatilidad del sistema se desarrolló una arquitectura completa para las comunicaciones. Para esto se diseñó un protocolo capaz de detectar errores en las comunicaciones y de transportar paquetes de información entre nodos. Este sistema se subdividió en 4 capas: Aplicación, Transporte, Enlace, Física.
 
-La capa física es íntegramente controlada por los módulos XBee, dejando los modos de direccionamiento a las capas de nivel superior.
+Las capas físicas y de transporte son íntegramente controladas por los módulos XBee, dejando los modos de direccionamiento a las capas de nivel superior.
 
-La capa de transporte se encarga de que tanto los datos salientes como entrantes cumplan con un determinado formato. Este conformación del paquete permite la detección de errores y la separación de paquetes en función de su utilidad.
+La capa de transporte se encarga de que tanto los datos salientes como entrantes cumplan con un determinado formato. Este conformación del paquete permite la detección de errores y la separación de paquetes en función de su utilidad. El módulo de comunicaciones de la capa API de la estructura de software se ocupa de este rol mediante la implementación de una máquina de estados. La comunicación con los módulos XBee la realiza a través del módulo UART de la capa HAL de la estructura de software. 
 
 En la Figura \ref{ref:trama} se muestra el formato de la trama establecida por el protocolo implementado. En la misma se aprecia que la carga útil de la misma es de 0-255Bytes, dejando encargada del fragmentado de los paquetes a la capa de aplicación.
-
  
-La capa de transporte es además encargada de verificar la trama mediante las direcciones de fuente y destino, numero de secuencia y checksum. Dado que el protocolo permite interconexión entre diferentes nodos, en ambos sentidos, se requiere un tipo de dato que especifique el carácter de la transmisión (control, telemetría, uplink, downlink).
+ \begin{figure}[!t]
+\centering
+\includegraphics[width=3.45in]{server}
+\caption{Esquema de funcionamiento del servidor}
+\label{ref:server}
+\end{figure}
+
+La capa de transporte es además encargada de verificar la trama mediante las direcciones de fuente y destino, numero de secuencia y checksum. Dado que el protocolo permite interconexión entre diferentes nodos, en ambos sentidos, se requiere un tipo de dato que especifique el carácter de la transmisión (control, telemetría, uplink, downlink). El contenido del payload es presentado a la aplicación de la capa superior que requiere este servicio mediante un modelo publisher/subscriber.
 
 La capa de aplicación implementa la utilidad del protocolo de comunicaciones. Es posible implementar hasta 256 tipos diferentes de datos, diferenciándolos en su propósito. Los tipos de datos implementados actualmente son:
 \begin{itemize}
@@ -191,15 +197,11 @@ La capa de aplicación implementa la utilidad del protocolo de comunicaciones. E
 \item Telemetry: transmite paquetes de datos relacionados con la telemetría.
 \end{itemize}
 
-\section{Implementación del servidor de mensajes}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=3.49in]{server}
-\caption{Esquema de funcionamiento del servidor}
-\label{ref:server}
-\end{figure}
- 
+
+
+
+\section{Implementación del servidor de mensajes}
 Como se aprecia en la descripción del protocolo de comunicaciones, el canal estará inundado por diferentes tipos de paquetes, transportando información que será útil a distintos puestos de trabajo. Dado que estos puestos pueden estar ubicados en diferentes locaciones, se implementó un servidor de mensajes, denominado RadioServer. Este servidor se encarga de canalizar las comunicaciones entre los dispositivos de tierra y el cuadricóptero. Ante el arribo de un mensaje, se direccionará el mismo al usuario en cuestión, utilizando puertos TCP. Esta estructura de comunicaciones brinda una gran flexibilidad en cuanto al espectro de utilización del dispositivo, pudiendo desplegar simultáneamente funciones en campo y en laboratorio.
 En la Figura \ref{ref:server} se ilustra el funcionamiento del servidor, junto con algunos ejemplos de clientes que se comunican con el cuadricóptero.
 
