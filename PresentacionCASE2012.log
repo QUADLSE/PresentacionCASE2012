@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.3.31)  20 APR 2012 14:59
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.3.31)  20 APR 2012 18:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -626,30 +626,31 @@ Package pdftex.def Info: jpeg/interconexion.png used on input line 134.
 
 Underfull \vbox (badness 3068) has occurred while \output is active []
 
- [2 <./jpeg/interconexion.png>] <soft.png, id=14, 674.52pt x 184.69pt>
-File: soft.png Graphic file (type png)
- <use soft.png>
-Package pdftex.def Info: soft.png used on input line 161.
-(pdftex.def)             Requested size: 249.33127pt x 68.2694pt.
+ [2 <./jpeg/interconexion.png>] <jpeg/soft.png, id=14, 674.52pt x 184.69pt>
+File: jpeg/soft.png Graphic file (type png)
 
-<trama.png, id=16, 252.945pt x 19.07124pt>
-File: trama.png Graphic file (type png)
- <use trama.png>
-Package pdftex.def Info: trama.png used on input line 178.
-(pdftex.def)             Requested size: 249.33127pt x 18.79909pt.
+<use jpeg/soft.png>
+Package pdftex.def Info: jpeg/soft.png used on input line 161.
+(pdftex.def)             Requested size: 252.22269pt x 69.05847pt.
+ <jpeg/trama.png, id=16, 1263.5205pt x 125.268pt>
+File: jpeg/trama.png Graphic file (type png)
 
-<server.png, id=17, 252.945pt x 182.6825pt>
-File: server.png Graphic file (type png)
- <use server.png>
-Package pdftex.def Info: server.png used on input line 200.
-(pdftex.def)             Requested size: 180.67499pt x 130.48875pt.
+<use jpeg/trama.png>
+Package pdftex.def Info: jpeg/trama.png used on input line 168.
+(pdftex.def)             Requested size: 245.71754pt x 24.3593pt.
+ <jpeg/server.png, id=17, 1216.545pt x 880.28876pt>
+File: jpeg/server.png Graphic file (type png)
 
-(./PresentacionCASE2012.bbl
+<use jpeg/server.png>
+Package pdftex.def Info: jpeg/server.png used on input line 198.
+(pdftex.def)             Requested size: 252.22269pt x 182.50204pt.
+ [3 <./jpeg/soft.png> <./jpeg/trama.png> <./jpeg/server.png>] (./PresentacionCA
+SE2012.bbl
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 26.
- [3 <./soft.png> <./trama.png>])
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -661,25 +662,23 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4
-
- <./server.png>] (./PresentacionCASE2012.aux) ) 
+[4] (./PresentacionCASE2012.aux) ) 
 Here is how much of TeX's memory you used:
  4959 strings out of 493633
- 72074 string characters out of 3143377
- 153435 words of memory out of 3000000
+ 72134 string characters out of 3143377
+ 152435 words of memory out of 3000000
  8165 multiletter control sequences out of 15000+200000
  34830 words of font info for 68 fonts, out of 3000000 for 9000
  834 hyphenation exceptions out of 8191
  38i,8n,38p,1329b,346s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2011/texmf-d
-ist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2011/texmf-dist/fonts/type1
-/urw/times/utmb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times
-/utmbi8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmr8a.p
-fb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on PresentacionCASE2012.pdf (4 pages, 416248 bytes).
+{/usr/local/texlive/2011/texmf-dist/fonts/enc
+/dvips/base/8r.enc}</usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/ut
+mb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/loca
+l/texlive/2011/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on PresentacionCASE2012.pdf (4 pages, 999993 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
+ 41 PDF objects out of 1000 (max. 8388607)
  24 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
