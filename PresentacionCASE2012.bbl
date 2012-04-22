@@ -37,10 +37,27 @@ N.~Michael, D.~Mellinger, Q.~Lindsey, and V.~Kumar, ``The grasp multiple
   micro-uav testbed,'' \emph{Robotics Automation Magazine, IEEE}, vol.~17,
   no.~3, pp. 56 --65, sept. 2010.
 
+\bibitem{wiki}
+\BIBentryALTinterwordspacing
+``Wiki de documentación del cuadrotor del {LSE}.'' [Online]. Available:
+  \url{http://quadlse.wikinet.org}
+\BIBentrySTDinterwordspacing
+
+\bibitem{lpc1769}
+\BIBentryALTinterwordspacing
+``{NXP} {LPC1769}.'' [Online]. Available:
+  \url{http://ics.nxp.com/lpcxpresso/~LPC1769}
+\BIBentrySTDinterwordspacing
+
 \bibitem{razor9d0f}
 \BIBentryALTinterwordspacing
-``9 degrees of freedom - razor imu - ahrs compatible.'' [Online]. Available:
-  \url{http://www.sparkfun.com/products/9623}
+``9 degrees of freedom - razor {IMU} - {AHRS} compatible.'' [Online].
+  Available: \url{http://www.sparkfun.com/products/9623}
+\BIBentrySTDinterwordspacing
+
+\bibitem{xbee}
+\BIBentryALTinterwordspacing
+``{XBee, Digi International}.'' [Online]. Available: \url{http://www.digi.com}
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}
