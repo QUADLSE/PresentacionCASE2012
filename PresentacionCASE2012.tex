@@ -50,7 +50,7 @@
 
 
 \author{
-\IEEEauthorblockN{Alan Kharsansky, Federico Roasio, Ezequiel Espósito, \\Claus Rosito, Daniel Schermuk \& Ariel Lutenberg}
+\IEEEauthorblockN{Alan Kharsansky, Federico Roasio, Ezequiel Espósito, \\Claus Rosito, Daniel Schermuk, Ariel Lutenberg}
 \IEEEauthorblockA{Laboratorio de Sistemas Embebidos,\\ Facultad de Ingeniería\\Universidad de Buenos Aires\\
 lse@fi.uba.ar}
 }
@@ -64,9 +64,7 @@ lse@fi.uba.ar}
 \begin{abstract}
 %\boldmath
 Se presenta el diseño y la implementación de un cuadricóptero como plataforma voladora de investigación y desarrollo en temas de electrónica, sistemas embebidos y control. El foco del presente trabajo está puesto en obtener un sistema abierto y escalable que sirva como base para futuros desarrollos.
-
-Para eso se siguieron tres líneas de trabajo paralelas: el diseño mecánico está realizado de forma modular, la implementación en hardware se hizo utilizando productos comerciales off the shelf con su debida especificación, y el software de control se separó en diferentes capas de abstracción.
-
+Para eso se siguieron tres líneas de trabajo paralelas: el diseño mecánico está realizado de forma modular, la implementación en hardware se hizo utilizando componentes disponibles comercialmente con su debida especificación, y el software de control se separó en diferentes capas de abstracción.
 De esta manera se logró una plataforma repetible, ya que al estar toda la información disponible cualquier laboratorio, grupo o individuo puede armar uno o más cuadricópteros de características similares. Y por otro lado, también se apunta a que sea una plataforma común de desarrollo, donde varios grupos trabajando de manera concurrente sobre diferentes aspectos de la mecánica, el hardware y el software del cuadricóptero se complementen y amplíen las posibilidades y el alcance de la plataforma.
 %% 168 palabras de un máximo de 250 permitidas. estamos bien!
 \end{abstract}
@@ -82,9 +80,8 @@ De esta manera se logró una plataforma repetible, ya que al estar toda la infor
 
 
 \section{Introducción}
-% no \IEEEPARstart
 
-Gracias a los avances de los últimos años en diferentes tecnologías, principalmente en motores brushless, sensores mems, baterías y microprocesadores, los cuadricopteros (también llamados ``cuadrotores'', o ``quadrotor'' en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
+\PARstart{G}{racias} a los avances de los últimos años en diferentes tecnologías, principalmente en motores sin escobillas(``brushless''), sensores MEMS, baterías y microprocesadores, los cuadricopteros (también llamados ``cuadrotores'', o ``quadrotor'' en inglés) se han popularizado entre hobbyistas y grupos de investigación en áreas de control y navegación.
 
 Si bien algunos cuadricópteros de hobbyistas \cite{parrot} tienen interfaces directas para ser controlados por teléfono celular, la mayoría son vehículos a radio control, y todos dependen de la capacidad del piloto para ser comandados desde tierra y seguir trayectorias o realizar acrobacias. 
 
@@ -92,7 +89,7 @@ En cambio, en varios grupos de investigación se está trabajando sobre el contr
 
 En general, la mayor parte de los trabajos publicados con respecto a los cuadricópteros hacen uso de unidades comerciales, centrándose en los aspectos de los algoritmos de control y áreas relacionadas \cite{starmac} \cite{grasp}, o bien en aplicaciones como por ejemplo adquisición de imágenes y su respectivo procesamiento \cite{grasp}, relegando los aspectos de la ingeniería del cuadricóptero a segundo plano. 
 
-Desde el Laboratorio de Sistemas Embebidos de la Facultad de Ingeniería de la Universidad de Buenos Aires abordamos el problema de diseñar e implementar un cuadricóptero de vuelo autónomo partiendo desde cero, con la visión de que esto nos permitiría ganar conocimiento y control sobre cada una de las partes que componen el sistema. A su vez, vimos que es un plataforma muy rica para generar desarrollos en cada uno de sus subsistemas, mejorando la performance del conjunto y abriendo nuevas áreas de trabajo. Una foto del prototipo se puede ver en la Fig. \ref{ref:quadfoto}.
+Desde el Laboratorio de Sistemas Embebidos de la Facultad de Ingeniería de la Universidad de Buenos Aires abordamos el problema de diseñar e implementar un cuadricóptero de vuelo autónomo partiendo desde cero, con la visión de que esto nos permitiría ganar conocimiento y control sobre cada una de las partes que componen el sistema. A su vez, vimos que es un plataforma muy rica para generar desarrollos en cada uno de sus subsistemas, mejorando la performance del conjunto y abriendo nuevas áreas de trabajo.
 
 \begin{figure}[!t]
 \centering
@@ -105,10 +102,13 @@ En particular, se trabajó con el objetivo de crear una plataforma abierta y esc
 
 La estructura del presente trabajo es la siguiente: primero se describe el diseño y la implementación mecánica y de hardware, luego la arquitectura del software tanto de tierra como de a bordo, luego se resume el estado actual del desarrollo y por último se presenta una breve descripción de las líneas de trabajo que se desprenden del presente trabajo.
 
+\vspace{5 mm}
 
 \section{Diseño Mecánico}
 
-Para el desarrollo del cuadricóptero se comenzó por el diseño de su mecánica estructural. Para que la plataforma sea fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, prohibiendo el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Con el objetivo de que el proceso de armado del cuadricóptero fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. 
+Para el desarrollo del cuadricóptero se comenzó por el diseño de su mecánica estructural. Para que la plataforma sea fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, evitando el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Con el objetivo de que el proceso de armado del cuadricóptero fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. Una foto del prototipo se puede ver en la Fig. \ref{ref:quadfoto}.
+
+\vspace{5 mm}
 
 \section{Arquitectura de Hardware}
 
@@ -120,7 +120,7 @@ Para el diseño de la electrónica de a bordo, se analizaron los requerimientos 
 \item Controlador de velocidad para motores brushless
 \end{itemize}
 	
-El microcontrolador principal elegido fue el LPC1769 de NXP Semiconductors, el cual cuenta con un núcleo ARM Cortex M3.  Este microcontrolador es capaz de ejecutar el algoritmo de control de actitud del vehículo y dispone de un tiempo ocioso de más del 80\%, lo cual permite la implementación de funcionalidades adicionales sin modificar la estructura de a bordo.
+El microcontrolador principal elegido fue el LPC1769 de NXP Semiconductors, el cual cuenta con un núcleo ARM Cortex M3.  Este microcontrolador es capaz de ejecutar el algoritmo de control de actitud del vehículo y dispone de un tiempo ocioso estimado en más del 80\%, lo cual permite la implementación de funcionalidades adicionales sin modificar la estructura de a bordo.
 
 Para la elección de los sensores de navegación se consideró que sería interesante que el microcontrolador recibiera información pre-procesada acerca de la actitud del cuadricóptero. Esta elección resultó en la necesidad de utilizar un segundo procesador para el análisis y filtrado de estos sensores. Dados estos requerimientos, se agregó la necesidad de evitar las derivas temporales, ocasionadas por los sensores inerciales relativos, tales como los acelerómetros y giróscopos, los cuales aportan información relativa al cambio de posición y no a la posición absoluta respecto de un eje de referencia dado. Considerando este último requisito y teniendo en cuenta que el cuadricóptero posee un gran espectro de utilidad en recintos cerrados, se descartó el uso de GPS, optando por el uso de magnetómetros, los cuales brindan información acerca de la posición del vehículo respecto al campo magnético del planeta. Finalmente se optó por el desarrollo Razor 9DoF (Degrees of Freedom) IMU (Inertial Measurement Unit) \cite{razor9d0f}, el cual cuenta con sensores de aceleración, giróscopos y magnetómetros alineados para la medición de las magnitudes en una terna ortogonal directa. Esta placa cuenta además con un ATmega328 para el procesamiento de los sensores.
 
@@ -136,13 +136,15 @@ Una vez definidos los módulos a utilizar, se diagramó un esquema de interconex
 \label{ref:conexiones}
 \end{figure}
 
-Juntando los costos de mecánica y de electrónica se estimó un costo de fabricación estimado de 400 dólares.
+Considerando los costos de mecánica y de electrónica se estimó un costo de fabricación estimado de 400 dólares.
+
+\vspace{5 mm}
 
 \section{Arquitectura de Software}
 Dado que uno de los principales objetivos del proyecto es que éste sea de fácil reproducción y escalabilidad, resulta de vital importancia lograr independencia entre el software y el hardware. Esto permitirá futuras actualizaciones de hardware, con pequeños retoques en el software. Con el fin de lograr este objetivo, se diagramó una estructura de software embebido compuesto por las siguientes partes:
 \begin{itemize}
 \item HAL (Hardware Abstraction Layer)
-\item API  (Hardware Abstraction Layer)
+\item API  (Application Programming Interface)
 \item Aplicación 
 \end{itemize}
 
@@ -172,7 +174,7 @@ En la Figura \ref{ref:soft} se muestra un diagrama de la implementación en las 
 
 \section{Arquitectura de Comunicaciones}
 
-Para aumentar la confiabilidad y versatilidad del sistema se desarrolló una arquitectura completa para las comunicaciones. Para esto se diseñó un protocolo capaz de detectar errores en las comunicaciones y de transportar paquetes de información entre nodos. Este sistema se subdividió en 4 capas: Aplicación, Transporte, Enlace, Física.
+Para aumentar la confiabilidad y versatilidad del sistema se desarrolló una arquitectura completa para las comunicaciones. Para esto se diseñó un protocolo capaz de detectar errores en las comunicaciones y de transportar paquetes de información entre nodos. Este subsistema se subdividió en cuato capas: Aplicación, Transporte, Enlace, Física.
 
 Las capas físicas y de transporte son íntegramente controladas por los módulos XBee, dejando los modos de direccionamiento a las capas de nivel superior.
 
@@ -199,12 +201,13 @@ La capa de aplicación implementa la utilidad del protocolo de comunicaciones. E
 
 
 
-
+\vspace{5 mm}
 
 \section{Implementación del servidor de mensajes}
 Como se aprecia en la descripción del protocolo de comunicaciones, el canal estará inundado por diferentes tipos de paquetes, transportando información que será útil a distintos puestos de trabajo. Dado que estos puestos pueden estar ubicados en diferentes locaciones, se implementó un servidor de mensajes, denominado RadioServer. Este servidor se encarga de canalizar las comunicaciones entre los dispositivos de tierra y el cuadricóptero. Ante el arribo de un mensaje, se direccionará el mismo al usuario en cuestión, utilizando puertos TCP. Esta estructura de comunicaciones brinda una gran flexibilidad en cuanto al espectro de utilización del dispositivo, pudiendo desplegar simultáneamente funciones en campo y en laboratorio.
 En la Figura \ref{ref:server} se ilustra el funcionamiento del servidor, junto con algunos ejemplos de clientes que se comunican con el cuadricóptero.
 
+\vspace{5 mm}
 
 \section{Trabajo Futuros}
 
@@ -222,19 +225,19 @@ Por último, el segmento terreno, es deciri los sistemas en tierra para planific
 
 Actualmente se están desarrollando estas líneas de trabajo tanto en el Laboratorio de Sistemas Embebidos como en el Grupo de Procesamiento de Señales, Identifiación y Control de la Facultad de Ingeniería, Universidad de Buenos Aires.
 
+\vspace{5 mm}
+
 \section*{Conclusión}
 
-Se obtuvo un cuadricóptero totalmente documentado y abierto, que sienta las bases para futuros trabajos de investigación y desarrollo en áreas de control, electrónica y sistemas embebidos. Su naturaleza abierta, repetible y escalable lo convierte en una plataforma ideal para futuros trabajos de investigación, y también para la adaptación relativamente rápida a posibles aplicaciones de sensado y reconocimiento.
+Se obtuvo un cuadricóptero totalmente documentado y abierto, que sienta las bases para futuros trabajos de investigación y desarrollo en áreas de control, electrónica y sistemas embebidos. 
+Su naturaleza abierta, repetible y escalable lo convierte en una plataforma ideal  para la adaptación relativamente rápida a posibles aplicaciones de sensado y reconocimiento.
+
+\vspace{5 mm}
 
 \section*{Agradecimientos}
+Los autores quieren agradecer al Dr. Ing. Juan I. Giribet y al Sr. David Vilaseca por sus valiosos consejos y aportes.
 
-
-The authors would like to thank...
-
-
-
-
-
+\vspace{5 mm}
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
 % adjust value as needed - may need to be readjusted if
