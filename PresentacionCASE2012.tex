@@ -1,5 +1,7 @@
 \documentclass[a4paper, conference]{IEEEtran}
 
+\renewcommand{\IEEEkeywordsname}{Palabras Clave}
+
 \usepackage{ifpdf}
 
 \usepackage{cite}
@@ -46,7 +48,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Diseño e Implemantación de un Cuadricóptero de Vuelo Autónomo}
+\title{Diseño e Implementación de un Cuadricóptero de Vuelo Autónomo}
 
 
 \author{
@@ -91,13 +93,6 @@ En general, la mayor parte de los trabajos publicados con respecto a los cuadric
 
 En el Laboratorio de Sistemas Embebidos de la Facultad de Ingeniería de la Universidad de Buenos Aires abordamos el problema de diseñar e implementar un cuadricóptero de vuelo autónomo partiendo desde cero, con la visión de que esto nos permitiría ganar conocimiento y control sobre cada una de las partes que componen el sistema. A su vez, vimos que es un plataforma muy rica para generar desarrollos en cada uno de sus subsistemas, mejorando la performance del conjunto y abriendo nuevas áreas de trabajo.
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3.25in]{foto_quad.png}
-\caption{Prototipo del cuadricóptero}
-\label{ref:quadfoto}
-\end{figure}
-
 En particular, se trabajó con el objetivo de crear una plataforma abierta y escalable, que le permita a cualquier individuo o grupo empezar a trabajar en el área nutriéndose de los desarrollos presentados y generando un marco para el trabajo en conjunto sobre mejoras y avances. En cuanto al aspecto abierto, se logró utilizando un sistema de documentación tipo wiki \cite{wiki}, de acceso libre, de manera que la información esté disponible universalmente para los individuos o grupos que quieran ponerse a trabajar en la plataforma. El aspecto escalable se logró separando el sistema en subsistemas modulares, de forma que cada subsistema puede ser cambiado y mejorado individualmente sin perjudicar el funcionamiento del conjunto. Se tuvo especial cuidado en la interconexión de la computadora de a bordo con los sensores y en el desarrollo de una arquitectura de capas de abstracción para la computadora de a bordo, que logra la independencia progresiva del software con respecto al hardware. 
 
 La estructura del presente trabajo es la siguiente: primero se describe el diseño y la implementación mecánica y de hardware, luego la arquitectura del software tanto de tierra como de a bordo, luego se resume el estado actual del desarrollo y por último se presenta una breve descripción de las líneas de trabajo que se desprenden del presente trabajo.
@@ -107,6 +102,13 @@ La estructura del presente trabajo es la siguiente: primero se describe el dise�
 \section{Diseño Mecánico}
 
 Para el desarrollo del cuadricóptero se comenzó por el diseño de su mecánica estructural. Para que la plataforma sea fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, evitando el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Con el objetivo de que el proceso de armado del cuadricóptero fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. Una foto del prototipo se puede ver en la Fig. \ref{ref:quadfoto}.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.25in]{foto_quad.png}
+\caption{Prototipo del cuadricóptero}
+\label{ref:quadfoto}
+\end{figure}
 
 \vspace{5 mm}
 
@@ -127,16 +129,16 @@ Para la elección de los sensores de navegación se consideró que sería intere
 En cuanto a los requerimientos del sistema de comunicación física, se estableció la necesidad de un control de colisiones por parte del hardware, simplificando la programación del microcontrolador principal y liberando tiempo de cálculo para los algoritmos de control y de funcionalidades adicionales. Dado este requisito y estableciendo un rango de utilización de unos pocos cientos de metros, se optó por utilizar los módulos XBee Pro de Digi International \cite{xbee}, los cuales poseen un control de colisión de paquetes tienen una comunicación sencilla con el microcontrolador, por puerto serie. Esta elección se vio respaldada por la disponibilidad local de los módulos, favoreciendo a la posibilidad de repetición de la plataforma.
 Para la elección de los controladores de velocidad de los motores, se optó por la utilización de ESC (Electronic Speed Control) para modelismo. Los mismos son capaces de proporcionar la corriente necesaria para el manejo de los motores y poseen un control del tipo PWM, lo cual aporta a la simplicidad de uso.
 
-Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En la Figura \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
-	
+Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En Fig. \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
+
+Considerando los costos de mecánica y de electrónica se estima un costo de fabricación de aproximadamente 400 dólares.
+
 \begin{figure}[btp]
 \centering
 \includegraphics[width=3.25in]{interconexion.png}
 \caption{Esquema de interconexión}
 \label{ref:conexiones}
 \end{figure}
-
-Considerando los costos de mecánica y de electrónica se estima un costo de fabricación de aproximadamente 400 dólares.
 
 \vspace{5 mm}
 
@@ -156,7 +158,7 @@ La capa de aplicación es la cual programa el usuario. Esta capa hace uso solame
 
 Esta división por capas implica una mayor complejidad en la programación de las mismas, pero facilita la portabilidad del código escrito, independizándolo del hardware utilizado, como se mencionó anteriormente. Esta independencia nos permite la migración entre plataformas diferentes, sin la necesidad de reescribir completamente el programa. Esta estructura favorece, además, la escritura del código por parte de terceros, utilizando funciones que elevan el nivel de abstracción de la programación.
 
-En la Figura \ref{ref:soft} se muestra un diagrama de la implementación en las capas previamente descriptas.
+En Fig. \ref{ref:soft} se muestra un diagrama de la implementación en las capas previamente descriptas.
 
 \begin{figure}[!t]
 \centering
@@ -180,7 +182,7 @@ Las capas físicas y de transporte son íntegramente controladas por los módulo
 
 La capa de transporte se encarga de que tanto los datos salientes como entrantes cumplan con un determinado formato. Este conformación del paquete permite la detección de errores y la separación de paquetes en función de su utilidad. El módulo de comunicaciones de la capa API de la estructura de software se ocupa de este rol mediante la implementación de una máquina de estados. La comunicación con los módulos XBee la realiza a través del módulo UART de la capa HAL de la estructura de software. 
 
-En la Figura \ref{ref:trama} se muestra el formato de la trama establecida por el protocolo implementado. En la misma se aprecia que la carga útil de la misma es de 0-255Bytes, dejando encargada del fragmentado de los paquetes a la capa de aplicación.
+En Fig. \ref{ref:trama} se muestra el formato de la trama establecida por el protocolo implementado. En la misma se aprecia que la carga útil de la misma es de 0-255Bytes, dejando encargada del fragmentado de los paquetes a la capa de aplicación.
  
  \begin{figure}[!t]
 \centering
@@ -205,7 +207,7 @@ La capa de aplicación implementa la utilidad del protocolo de comunicaciones. E
 
 \section{Implementación del servidor de mensajes}
 Como se aprecia en la descripción del protocolo de comunicaciones, el canal estará inundado por diferentes tipos de paquetes, transportando información que será útil a distintos puestos de trabajo. Dado que estos puestos pueden estar ubicados en diferentes locaciones, se implementó un servidor de mensajes, denominado RadioServer. El RadioServer es un servidor implementado como parte del desarrollo, que corre en tierra y se encarga de canalizar las comunicaciones entre los dispositivos de tierra y el cuadricóptero. Ante el arribo de un mensaje, se direccionará el mismo al usuario en cuestión, utilizando puertos TCP. Esta estructura de comunicaciones brinda una gran flexibilidad en cuanto al espectro de utilización del dispositivo, pudiendo desplegar simultáneamente funciones en campo y en laboratorio.
-En la Figura \ref{ref:server} se ilustra el funcionamiento del servidor, junto con algunos ejemplos de clientes que se comunican con el cuadricóptero.
+En Fig. \ref{ref:server} se ilustra el funcionamiento del servidor, junto con algunos ejemplos de clientes que se comunican con el cuadricóptero.
 
 \vspace{5 mm}
 
@@ -221,7 +223,7 @@ Los algoritmos control de actitud y de guiado también son materia de desarrollo
 
 Así mismo se desprende una línea de trabajo consistente en vuelos en formación de más de un cuadricóptero, en la que los controles de las diferentes aeronaves se coordinan entre sí para lograr formaciones estables. Una posible aplicación del vuelo en formación es cubrir un área a sensar con muchos cuadricópteros en un tiempo corto.
 
-Por último, el segmento terreno, es deciri los sistemas en tierra para planificar los vuelos, darle las indicaciones necesarias al cuadricóptero, y procesar los datos recolectados también está abierto a desarrollarse, ya que actualmente solo están implementados los programas necesarios para controlar mínimamente a la aeronave y para mostrar la telemetría recibida.
+Por último, el segmento terreno, es decir los sistemas en tierra para planificar los vuelos, darle las indicaciones necesarias al cuadricóptero, y procesar los datos recolectados también está abierto a desarrollarse, ya que actualmente solo están implementados los programas necesarios para controlar mínimamente a la aeronave y para mostrar la telemetría recibida.
 
 Actualmente se están desarrollando estas líneas de trabajo tanto en el Laboratorio de Sistemas Embebidos como en el Grupo de Procesamiento de Señales, Identifiación y Control de la Facultad de Ingeniería, Universidad de Buenos Aires.
 
@@ -229,8 +231,10 @@ Actualmente se están desarrollando estas líneas de trabajo tanto en el Laborat
 
 \section*{Conclusión}
 
-Se diseño e implementó un cuadricóptero totalmente documentado y abierto, que sienta las bases para futuros trabajos de investigación y desarrollo en áreas de control, electrónica y sistemas embebidos. 
+Se diseñó e implementó un cuadricóptero totalmente documentado y abierto, que sienta las bases para futuros trabajos de investigación y desarrollo en áreas de control, electrónica y sistemas embebidos. 
+El proyecto alcanzó un estado de \emph{plataforma de algoritmos}, quedando completamente desarrollados los aspectos constructivos, electrónicos y de enlace de comunicaciones. Esto permite el uso del cuadricóptero como plataforma para el ensayo de diferentes técnicas de control, guiado y telemetría, las cuales deberán implementarse para el uso del mismo.
 Su naturaleza abierta, repetible y escalable lo convierte en una plataforma ideal  para la adaptación relativamente rápida a posibles aplicaciones de sensado y reconocimiento.
+
 
 \vspace{5 mm}
 
