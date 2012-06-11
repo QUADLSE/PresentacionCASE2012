@@ -103,7 +103,7 @@ La estructura del presente trabajo es la siguiente: primero se describe el dise�
 
 Para el desarrollo del cuadricóptero se comenzó por el diseño de su mecánica estructural. Para que la plataforma sea fácilmente reproducible, se optó por utilizar planchas de corte y una cortadora láser. Esta decisión impactó fuertemente en las posibilidades de diseño, evitando el uso de estructuras tridimensionales y limitando la fabricación a piezas planas. Para la forma del vehículo se propuso una geometría simétrica con dos ejes largos y un octógono central con el fin de colocar la electrónica en el mismo. Con el objetivo de que el proceso de armado del cuadricóptero fuera lo más simple posible, se propuso un sistema de encastre, lo que evita grandes cantidades de elementos de sujeción, reduciendo el peso y a su vez aportando a la simplicidad del diseño. Una foto del prototipo se puede ver en la Fig. \ref{ref:quadfoto}.
 
-\begin{figure}[!t]
+\begin{figure}[b]
 \centering
 \includegraphics[width=3.25in]{foto_quad.png}
 \caption{Prototipo del cuadricóptero}
@@ -129,13 +129,13 @@ Para la elección de los sensores de navegación se consideró que sería intere
 En cuanto a los requerimientos del sistema de comunicación física, se estableció la necesidad de un control de colisiones por parte del hardware, simplificando la programación del microcontrolador principal y liberando tiempo de cálculo para los algoritmos de control y de funcionalidades adicionales. Dado este requisito y estableciendo un rango de utilización de unos pocos cientos de metros, se optó por utilizar los módulos XBee Pro de Digi International \cite{xbee}, los cuales poseen un control de colisión de paquetes tienen una comunicación sencilla con el microcontrolador, por puerto serie. Esta elección se vio respaldada por la disponibilidad local de los módulos, favoreciendo a la posibilidad de repetición de la plataforma.
 Para la elección de los controladores de velocidad de los motores, se optó por la utilización de ESC (Electronic Speed Control) para modelismo. Los mismos son capaces de proporcionar la corriente necesaria para el manejo de los motores y poseen un control del tipo PWM, lo cual aporta a la simplicidad de uso.
 
-Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En Fig. \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
+Una vez definidos los módulos a utilizar, se diagramó un esquema de interconexión entre los mismos. Dado que el ATmega328 de la placa de sensores se comunica por puerto serie, se designó la conexión del mismo hacia el microcontrolador por ese puerto. Análogamente se fijó la conexión entre el módulo de comunicaciones y el microcontrolador por otro puerto serie. Por último los controladores de velocidad se conectaron a pines del microcontrolador capaces de utilizar PWM por hardware. En la Fig. \ref{ref:conexiones} se muestra un esquema de conexionado de las partes.
 
 Considerando los costos de mecánica y de electrónica se estima un costo de fabricación de aproximadamente 400 dólares.
 
-\begin{figure}[btp]
+\begin{figure}[b]
 \centering
-\includegraphics[width=3.25in]{interconexion.png}
+\includegraphics[width=2.65in]{interconexion.png}
 \caption{Esquema de interconexión}
 \label{ref:conexiones}
 \end{figure}
@@ -160,14 +160,14 @@ Esta división por capas implica una mayor complejidad en la programación de la
 
 En Fig. \ref{ref:soft} se muestra un diagrama de la implementación en las capas previamente descriptas.
 
-\begin{figure}[!t]
+\begin{figure}[b]
 \centering
 \includegraphics[width=3.49in]{soft}
 \caption{Estructura de software}
 \label{ref:soft}
 \end{figure}
 
-\begin{figure}[!t]
+\begin{figure}[b]
 \centering
 \includegraphics[width=3.40in]{trama}
 \caption{Trama del protocolo de comunicaciones}
@@ -184,7 +184,7 @@ La capa de transporte se encarga de que tanto los datos salientes como entrantes
 
 En Fig. \ref{ref:trama} se muestra el formato de la trama establecida por el protocolo implementado. En la misma se aprecia que la carga útil de la misma es de 0-255Bytes, dejando encargada del fragmentado de los paquetes a la capa de aplicación.
  
- \begin{figure}[!t]
+ \begin{figure}[b]
 \centering
 \includegraphics[width=3.45in]{server}
 \caption{Esquema de funcionamiento del servidor}
